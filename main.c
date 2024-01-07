@@ -35,22 +35,6 @@ int countWordsOfLength(char* filename, int wordSize) {
 }
 
 bool buildWordArray(char* filename, char** words, int numWords, int wordSize) { 
-    //---------------------------------------------------------
-    // TODO - write buildWordArray()    
-    //      open a file with name <filename> and fill the 
-    //      pre-allocated word array <words> with only words
-    //      that are exactly <wordSize> letters long;
-    //      the file should contain exactly <numWords> words 
-    //      that are the correct number of letters; thus, 
-    //      <words> is pre-allocated as <numWords> char* ptrs, 
-    //      each pointing to a C-string of legnth <wordSize>+1;
-    //          return true iff the file is opened successfully
-    //                      AND the file contains exactly 
-    //                      <numWords> words of exactly 
-    //                      <wordSize> letters, and those words
-    //                      are stored in the <words> array
-    //          return false otherwise
-    //---------------------------------------------------------
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
         return false;
@@ -71,18 +55,10 @@ bool buildWordArray(char* filename, char** words, int numWords, int wordSize) {
     }
     fclose(file);
 
-    return (count == numWords); // should be the same
+    return (count == numWords);
 }
 
 int findWord(char** words, char* aWord, int loInd, int hiInd) { 
-    //---------------------------------------------------------
-    // TODO - write findWord()
-    //          binary search for string <aWord> in an 
-    //          alphabetically sorted array of strings <words>, 
-    //          only between <loInd> & <hiInd>
-    //              return index of <aWord> if found
-    //              return -1 if not found b/w loInd & hiInd
-    //---------------------------------------------------------
     while (loInd <= hiInd) {
         int midpoint = loInd + (hiInd - loInd) / 2; //caculate midpoint for the binary search
         int cmpRes = strcmp(aWord, words[midpoint]);
@@ -99,14 +75,6 @@ int findWord(char** words, char* aWord, int loInd, int hiInd) {
 }
 
 void freeWords(char** words, int numWords) {
-    //---------------------------------------------------------
-    // TODO - write freeWords()
-    //          free up all heap-allocated space for <words>,
-    //          which is an array of <numWords> C-strings
-    //           - free the space allocated for each C-string 
-    //           - then, free the space allocated for the array
-    //                  of pointers, <words>, itself
-    //---------------------------------------------------------
    for (int i = 0; i < numWords; i++) {
        free(words[i]);
    }
@@ -114,16 +82,6 @@ void freeWords(char** words, int numWords) {
 }
 
 void insertWordAtFront(WordNode** ladder, char* newWord) {
-    //---------------------------------------------------------
-    // TODO - write insertWordAtFront()
-    //          allocate space for a new [WordNode], set its 
-    //          [myWord] subitem using <newWord> and insert
-    //          it to the front of <ladder>, which is a 
-    //          pointer-passed-by-pointer as the head node of 
-    //          ladder changes inside this function; 
-    //          <newWord> is a pointer to a C-string from the 
-    //          full word array, already heap-allocated
-    //---------------------------------------------------------
     WordNode* newNode = (WordNode*)malloc(sizeof(WordNode));
     newNode->myWord = newWord;
     newNode->next = *ladder;
@@ -131,10 +89,6 @@ void insertWordAtFront(WordNode** ladder, char* newWord) {
 }
 
 int getLadderHeight(WordNode* ladder) {
-    //---------------------------------------------------------
-    // TODO - write getLadderHeight()
-    //          find & return number of words in <ladder> list
-    //---------------------------------------------------------
     int height = 0;
     while(ladder != NULL) {
         height++;
@@ -144,15 +98,6 @@ int getLadderHeight(WordNode* ladder) {
 }
 
 WordNode* copyLadder(WordNode* ladder) {
-    //---------------------------------------------------------
-    // TODO - write copyLadder()
-    //          make a complete copy of <ladder> and return it;
-    //          the copy ladder must have new space allocated
-    //          for each [WordNode] in <ladder>, BUT the
-    //          C-string pointers to elements of the full word  
-    //          array can be reused; i.e. the actual words do 
-    //          NOT need another allocation here
-    //---------------------------------------------------------
     WordNode* copy = NULL;
     WordNode* current = ladder;
     WordNode* ctail = NULL;
@@ -175,13 +120,6 @@ WordNode* copyLadder(WordNode* ladder) {
 }
 
 void freeLadder(WordNode* ladder) {
-    //---------------------------------------------------------
-    // TODO - write freeLadder()
-    //          free up all heap-allocated space for <ladder>;
-    //          this does NOT include the actual words, 
-    //          instead just free up the space that was 
-    //          allocated for each [WordNode]
-    //---------------------------------------------------------
     while (ladder != NULL) {
         WordNode* temp = ladder;
         ladder = ladder->next;
@@ -191,16 +129,6 @@ void freeLadder(WordNode* ladder) {
 }
 
 void insertLadderAtBack(LadderNode** list, WordNode* newLadder) {
-    //---------------------------------------------------------
-    // TODO - write insertLadderAtBack()
-    //          allocate space for a new [LadderNode], set its 
-    //          [topWord] subitem using <newLadder>; then, find
-    //          the back of <list> and append the newly created
-    //          [LadderNode] to the back; Note that <list> is a 
-    //          pointer-passed-by-pointer, since this function 
-    //          must handle the edge case where <list> is empty
-    //          and the new [LadderNode] becomes the head node
-    //---------------------------------------------------------
     LadderNode* newNode = (LadderNode*)malloc(sizeof(LadderNode));
     newNode->topWord = newLadder;
     newNode->next = NULL;
@@ -217,19 +145,6 @@ void insertLadderAtBack(LadderNode** list, WordNode* newLadder) {
 }
 
 WordNode* popLadderFromFront(LadderNode** list) {
-    //---------------------------------------------------------
-    // TODO - write popLadderFromFront()
-    //          pop the first Ladder from the front of the list
-    //          by returning the pointer to the head node 
-    //          of <list> AND updating the head node of <list>
-    //          to the next [LadderNode]; Note that <list> is a 
-    //          pointer-passed-by-pointer, since this function 
-    //          updates the head node to be one down the list;
-    //          the [LadderNode] popped off the front must have
-    //          its memory freed in this function, since it 
-    //          will go out of scope, but the ladder itself, 
-    //          i.e. the head [WordNode], should NOT be freed. 
-    //---------------------------------------------------------
     if (*list == NULL) {
         return NULL;
     }
@@ -243,16 +158,6 @@ WordNode* popLadderFromFront(LadderNode** list) {
 }
 
 void freeLadderList(LadderNode* myList) {
-    //---------------------------------------------------------
-    // TODO - write freeLadderList()
-    //          free up all heap-allocated space for <myList>;
-    //          for each ladder in <myList>:
-    //           - free the space allocated for each [WordNode] 
-    //                  in the ladder using freeLadder()
-    //           - then, free the space allocated for the 
-    //                  [LadderNode] itself 
-    //---------------------------------------------------------
-
     while (myList != NULL) {
         LadderNode* current = myList;
         myList = myList->next;
@@ -262,17 +167,6 @@ void freeLadderList(LadderNode* myList) {
     }
 }
 
-
-// try making temp a memory allocated wordNode to make insertword at front and copy not have to do the strdup
-// make temp not actually its own thing but just make it hte words found word index
-WordNode* findShortestWordLadder(   char** words, 
-                                    bool* usedWord, 
-                                    int numWords, 
-                                    int wordSize, 
-                                    char* startWord, 
-                                    char* finalWord ) {
-    //---------------------------------------------------------
-    // TODO - write findShortestWordLadder()
     //          run algorithm to find the shortest word ladder
     //          from <startWord> to <finalWord> in the <words>
     //          word array, where each word is <wordSize> long 
@@ -289,7 +183,12 @@ WordNode* findShortestWordLadder(   char** words,
     //                  before return, free all heap-allocated 
     //                  memory that is created here that is not 
     //                  the returned ladder
-    //---------------------------------------------------------
+WordNode* findShortestWordLadder(   char** words, 
+                                    bool* usedWord, 
+                                    int numWords, 
+                                    int wordSize, 
+                                    char* startWord, 
+                                    char* finalWord ) {
     LadderNode* myList = NULL;
     WordNode* myLadder = NULL;
     insertWordAtFront(&myLadder, startWord);
@@ -300,7 +199,7 @@ WordNode* findShortestWordLadder(   char** words,
     while (myList != NULL) {
         myLadder = popLadderFromFront(&myList); // gets the starting word
 
-        // nested loop to go through each possible word by chaning each index of start word and
+        // nested loop to go through each possible word by changing each index of start word and
         // changing to each letter of the alphabet.
         for (int i = 0; i < wordSize; i++) {
            char temp[wordSize+1];
@@ -388,10 +287,6 @@ void printList(LadderNode* list) {
 }
 
 
-//-----------------------------------------------------
-// The primary application is fully provided in main(); 
-//  no changes should be made to main()
-//-----------------------------------------------------
 int main() {
     srand((int)time(0));
     
