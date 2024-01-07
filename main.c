@@ -19,7 +19,6 @@ int countWordsOfLength(char* filename, int wordSize) {
     if (file == NULL) {
         return -1;
     }
-
     int count = 0;
     char word[200];
 
