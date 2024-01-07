@@ -166,22 +166,22 @@ void freeLadderList(LadderNode* myList) {
     }
 }
 
-    //          run algorithm to find the shortest word ladder
-    //          from <startWord> to <finalWord> in the <words>
-    //          word array, where each word is <wordSize> long 
-    //          and there are <numWords> total words;
-    //          <usedWord> also has size <numWords>, such that
-    //          usedWord[i] is only true if words[i] has 
-    //          previously be entered into a ladder, and should
-    //          therefore not be added to any other ladders; 
-    //          the algorithm creates partial word ladders, 
-    //          which are [WordNode] linked lists, and stores 
-    //          them in a [LadderNode] linked list. 
-    //              return a pointer to the shortest ladder;
-    //              return NULL if no ladder is possible;
-    //                  before return, free all heap-allocated 
-    //                  memory that is created here that is not 
-    //                  the returned ladder
+//          run algorithm to find the shortest word ladder
+//          from <startWord> to <finalWord> in the <words>
+//          word array, where each word is <wordSize> long 
+//          and there are <numWords> total words;
+//          <usedWord> also has size <numWords>, such that
+//          usedWord[i] is only true if words[i] has 
+//          previously be entered into a ladder, and should
+//          therefore not be added to any other ladders; 
+//          the algorithm creates partial word ladders, 
+//          which are [WordNode] linked lists, and stores 
+//          them in a [LadderNode] linked list. 
+//              return a pointer to the shortest ladder;
+//              return NULL if no ladder is possible;
+//                  before return, free all heap-allocated 
+//                  memory that is created here that is not 
+//                  the returned ladder
 WordNode* findShortestWordLadder(   char** words, 
                                     bool* usedWord, 
                                     int numWords, 
